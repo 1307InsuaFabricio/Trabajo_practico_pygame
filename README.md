@@ -183,8 +183,8 @@ Esta función simplifica la tarea de redibujar todos los elementos en pantalla, 
         pygame.draw.aaline(self.screen, WHITE, (WIDTH // 2, 0), (WIDTH // 2, HEIGHT))
 
         # Dibujar los puntajes y nombres de jugadores
-        self.dibujar_texto(f"{self.jugador_1_name}: {self.score1}", WHITE, WIDTH // 4, 20, font=self.letra_pequeña)
-        self.dibujar_texto(f"{self.jugador_2_name}: {self.score2}", WHITE, 3 * WIDTH // 4, 20, font=self.letra_pequeña)
+        self.dibujar_texto(f"{self.jugador_1_name}: {self.score1}", WHITE, WIDTH // 6, 20, font=self.letra_pequeña)
+        self.dibujar_texto(f"{self.jugador_2_name}: {self.score2}", WHITE, 3 * WIDTH // 5, 20, font=self.letra_pequeña)
 
 ## 8. Función para manejar la entrada del teclado
 
