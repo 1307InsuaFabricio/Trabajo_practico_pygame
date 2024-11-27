@@ -1,0 +1,22 @@
+[
+    {
+        "ganador": {
+            "nombre": "fabricio",
+            "puntos": 10
+        },
+        "perdedor": {
+            "nombre": "francisco",
+            "puntos": 8
+        }
+    },
+    {
+        "ganador": {
+            "nombre": "fabricio",
+            "puntos": 10
+        },
+        "perdedor": {
+            "nombre": "patricio",
+            "puntos": 9
+        }
+    }
+]
