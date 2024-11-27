@@ -163,6 +163,117 @@ La función principal inicializa el juego y contiene el bucle principal.
 
         pygame.quit()
 
+## 7. Función para dibujar elementos en pantalla
+
+Esta función simplifica la tarea de redibujar todos los elementos en pantalla, centralizando este código.
+
+    ```python
+        def dibujar_elementos(self):
+        # Fondo negro
+        self.screen.fill(BLACK)
+
+        # Dibujar las paletas
+        pygame.draw.rect(self.screen, WHITE, (20, self.paleta1_y, self.paleta_width, self.paleta_height))
+        pygame.draw.rect(self.screen, WHITE, (WIDTH - 20 - self.paleta_width, self.paleta2_y, self.paleta_width, self.paleta_height))
+
+        # Dibujar la pelota
+        pygame.draw.ellipse(self.screen, self.pelota_color, (self.pelota_x, self.pelota_y, self.pelota_size, self.pelota_size))
+
+        # Dibujar la línea del medio
+        pygame.draw.aaline(self.screen, WHITE, (WIDTH // 2, 0), (WIDTH // 2, HEIGHT))
+
+        # Dibujar los puntajes y nombres de jugadores
+        self.dibujar_texto(f"{self.jugador_1_name}: {self.score1}", WHITE, WIDTH // 4, 20, font=self.letra_pequeña)
+        self.dibujar_texto(f"{self.jugador_2_name}: {self.score2}", WHITE, 3 * WIDTH // 4, 20, font=self.letra_pequeña)
+
+## 8. Función para manejar la entrada del teclado
+
+Esto separa la lógica del teclado para mover las paletas o reiniciar el juego.
+
+    ```python
+        def manejar_entrada(self):
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w] and self.paleta1_y > 0:
+        self.paleta1_y -= self.paleta_speed
+    if keys[pygame.K_s] and self.paleta1_y < HEIGHT - self.paleta_height:
+        self.paleta1_y += self.paleta_speed
+    if keys[pygame.K_UP] and self.paleta2_y > 0:
+        self.paleta2_y -= self.paleta_speed
+    if keys[pygame.K_DOWN] and self.paleta2_y < HEIGHT - self.paleta_height:
+        self.paleta2_y += self.paleta_speed
+
+## 9. Función para verificar si hay un ganador
+
+Esto resume la lógica que determina si hay un ganador.
+
+    ```python
+        def verificar_ganador(self):
+    if self.score1 == 10 or self.score2 == 10:
+        winner = self.jugador_1_name if self.score1 == 10 else self.jugador_2_name
+        loser = self.jugador_2_name if winner == self.jugador_1_name else self.jugador_1_name
+        winner_score = self.score1 if self.score1 == 10 else self.score2
+        loser_score = self.score2 if winner == self.jugador_1_name else self.score1
+
+        self.dibujar_texto(f"{winner} gana!", WHITE, WIDTH // 2, HEIGHT // 2, center=True)
+        pygame.display.flip()
+        self.guardar_resultados(winner, winner_score, loser, loser_score)
+        pygame.time.wait(3000)
+
+        # Reiniciar el juego
+        self.score1 = 0
+        self.score2 = 0
+        self.reiniciar_pelota()
+        self.reiniciar_paletas()
+        self.pedir_nombres()
+
+## 10. Función para reproducir sonidos
+
+Esto centraliza la lógica para reproducir sonidos y mantener el código más ordenado.
+
+    ```python
+    def reproducir_sonido(self, sonido):def reproducir_sonido(self, sound):
+    try:
+        sound.play()
+    except pygame.error as e:
+        print(f"Error al reproducir sonido: {e}")
+
+## Integración de las funciones
+
+En el método run, puedes llamar a estas funciones para simplificar la estructura:
+
+    ```python
+        def run(self):
+    self.pedir_nombres()
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    self.score1 = 0
+                    self.score2 = 0
+                    self.multiplicar_velocidad = 1
+                    self.reiniciar_pelota()
+                    self.reiniciar_paletas()
+                if event.key == pygame.K_m:
+                    self.pedir_nombres()
+                    self.score1 = 0
+                    self.score2 = 0
+                    self.reiniciar_pelota()
+                    self.reiniciar_paletas()
+
+        self.manejar_entrada()
+        self.mover_bola()
+        self.verificar_ganador()
+
+        self.dibujar_elementos()
+        pygame.display.flip()
+        self.clock.tick(60)
+
+Con esta estructura modular, el código será más fácil de leer, mantener y ampliar en el futuro.
+
 ### `Archivo colores.json`
 
     {

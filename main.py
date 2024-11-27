@@ -47,8 +47,8 @@ class juego_tenis:
 
         # Sonidos
         self.bounce_sound = pygame.mixer.Sound("sonidos\\bounce_sound.mp3")
-        self.score_sound = pygame.mixer.Sound("sonidos\\menu.mp3")
-        self.menu_sound = pygame.mixer.Sound("sonidos\\score_sound.mp3")
+        self.score_sound = pygame.mixer.Sound("sonidos\\score_sound.mp3")
+        self.menu_sound = pygame.mixer.Sound("sonidos\\menu.mp3")
         
 
         # Fuentes
@@ -229,8 +229,8 @@ class juego_tenis:
             pygame.draw.aaline(self.screen, WHITE, (WIDTH // 2, 0), (WIDTH // 2, HEIGHT))
 
             # Dibujar nombres y puntajes
-            self.dibujar_texto(f"{self.jugador_1_name}: {self.score1}", WHITE, WIDTH // 4, 20, font=self.letra_pequeña)
-            self.dibujar_texto(f"{self.jugador_2_name}: {self.score2}", WHITE, 3 * WIDTH // 4, 20, font=self.letra_pequeña)
+            self.dibujar_texto(f"{self.jugador_1_name}: {self.score1}", WHITE, WIDTH // 6, 20, font=self.letra_pequeña)
+            self.dibujar_texto(f"{self.jugador_2_name}: {self.score2}", WHITE, 3 * WIDTH // 5, 20, font=self.letra_pequeña)
 
             pygame.display.flip()
             self.clock.tick(60)
