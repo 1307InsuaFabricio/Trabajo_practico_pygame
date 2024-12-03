@@ -18,5 +18,25 @@
             "nombre": "patricio",
             "puntos": 9
         }
+    },
+    {
+        "ganador": {
+            "nombre": "tizi",
+            "puntos": 10
+        },
+        "perdedor": {
+            "nombre": "jota",
+            "puntos": 5
+        }
+    },
+    {
+        "ganador": {
+            "nombre": "d",
+            "puntos": 11
+        },
+        "perdedor": {
+            "nombre": "f",
+            "puntos": 5
+        }
     }
 ]
